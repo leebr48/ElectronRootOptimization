@@ -1,0 +1,1 @@
+The formatting of these files is unique because the custom software [SFINCSopt](https://github.com/leebr48/SFINCSopt) was used to perform the optimization. All the files are input files for [SFINCSopt](https://github.com/leebr48/SFINCSopt) except `output.configuration1_stage3` and `wout_configuration1_stage3.nc`.
