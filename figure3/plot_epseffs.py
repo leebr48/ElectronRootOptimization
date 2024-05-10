@@ -56,7 +56,7 @@ else:
 _, fulls = createVMECGrids(ns)
 sgrid = fulls[1:] # Ignore the magnetic axis because eps_eff cannot be evaluated there by NEO.
 rhogrid = np.sqrt(sgrid)
-data = np.column_stack((rhogrid, w7xhm_epseff, configuration1_epseff, configuration2_epseff, configuration3_epseff))
+data = np.column_stack((rhogrid, configuration1_epseff, configuration2_epseff, configuration3_epseff, w7xhm_epseff))
 
 # Plot data
 plt.subplots(figsize=(xSizeInches, ySizeInches))
@@ -70,7 +70,7 @@ plt.ylim(ymax=epseffMax)
 plt.gca().xaxis.set_major_formatter(formatter)
 plt.xlabel(r'$\rho$')
 plt.ylabel(r'$\epsilon_\mathrm{eff}$ (%)')
-plt.legend(['W7-X High-Mirror', 'Configuration 1', 'Configuration 2', 'Configuration 3'])
+plt.legend(['Configuration 1', 'Configuration 2', 'Configuration 3', 'W7-X High-Mirror'])
 plt.savefig('epseffs'+'.'+fileExt, bbox_inches='tight', dpi=dpi)
 
 plt.show()
