@@ -1,5 +1,6 @@
 # This script is based on code from Alan Goodman.
 
+# Inputs
 fnames = ['../configurations/w7xhm/wout_w7xhm.nc', '../configurations/configuration1/stage3/wout_configuration1_stage3.nc', '../configurations/configuration2/wout_configuration2.nc', '../configurations/configuration3/wout_configuration3.nc']
 figNames = ['w7xhm_lpk', 'configuration1_lpk', 'configuration2_lpk', 'configuration3_lpk']
 xmins = [17, 35, 17, 17]
@@ -11,6 +12,7 @@ axisFontSize = 24
 dpi = 600
 fileExt = 'pdf'
 
+# Code
 import matplotlib as mpl
 from matplotlib.ticker import LinearLocator
 import matplotlib.pyplot as plt

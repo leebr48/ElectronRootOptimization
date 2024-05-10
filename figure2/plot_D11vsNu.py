@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # This script was originally written by Hakan Smith.
 
 # Inputs

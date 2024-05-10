@@ -1,5 +1,3 @@
-# This script plots epseff for W7-X high-mirror and the optimized configurations.
-
 #Inputs
 epseffMax = 5
 axisFontSize = 24
