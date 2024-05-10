@@ -1,0 +1,1 @@
+The given `input` file does not *exactly* reproduce the given `wout` file - I got the latter from a colleague, and it appears the only factor preventing perfect reproduction of it is a numerical setting I cannot pinpoint. The differences in physical quantities are so small as to be irrelevant.
