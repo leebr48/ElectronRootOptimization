@@ -8,18 +8,16 @@ xmaxes = [25, 43, 25, 25]
 ymin = -5.25
 ymax = 5.25
 numticks = 5
-axisFontSize = 24
-dpi = 600
-fileExt = 'pdf'
 
 # Code
-import matplotlib as mpl
 from matplotlib.ticker import LinearLocator
 import matplotlib.pyplot as plt
 import numpy as np
 from simsopt.mhd.vmec import Vmec
 import math
-import sys, os
+import sys
+sys.path.append('../plotStandards')
+from plotStandards import axisFontSize, dpi, fileExt
 
 plt.rc('font', size=axisFontSize)
 
@@ -83,6 +81,3 @@ for fname, figName, xmin, xmax in zip(fnames, figNames, xmins, xmaxes):
     plt.ylabel('Z (m)')
 
     plt.savefig(figName+'.'+fileExt, bbox_inches='tight', dpi=dpi)
-
-plt.show()
-plt.close()

@@ -1,11 +1,8 @@
 #Inputs
+epseffMin = 0
 epseffMax = 5
-axisFontSize = 24
-legendFontSize = 13
-xSizeInches = 8
+xSizeInches = 9
 ySizeInches = 6
-fileExt = 'pdf'
-dpi = 600
 
 ########################################################################################
 
@@ -18,6 +15,8 @@ import sys
 from scipy.io import netcdf_file
 sys.path.append(os.getenv('STELLOPTPLUSSFINCS_HOME')+'/src')
 from dataProc import createVMECGrids
+sys.path.append('../plotStandards')
+from plotStandards import axisFontSize, legendFontSize, dpi, fileExt
 
 plt.rc('font', size=axisFontSize)
 plt.rc('legend', fontsize=legendFontSize)
@@ -66,11 +65,9 @@ plt.plot(data[:,0], data[:,3])
 plt.plot(data[:,0], data[:,4])
 plt.yticks(np.arange(0,np.ceil(np.max(data[:,1]))+1, 1))
 plt.xlim(xmin=0, xmax=1)
-plt.ylim(ymax=epseffMax)
+plt.ylim(ymin=epseffMin, ymax=epseffMax)
 plt.gca().xaxis.set_major_formatter(formatter)
 plt.xlabel(r'$\rho$')
 plt.ylabel(r'$\epsilon_\mathrm{eff}$ (%)')
 plt.legend(['Configuration 1', 'Configuration 2', 'Configuration 3', 'W7-X High-Mirror'])
 plt.savefig('epseffs'+'.'+fileExt, bbox_inches='tight', dpi=dpi)
-
-plt.show()

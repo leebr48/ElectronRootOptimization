@@ -3,15 +3,9 @@ profsFilePaths = ['configuration1', 'configuration2', 'configuration3'] # Path t
 figNamePrefixes = profsFilePaths
 nMax = 2.5
 TMax = 25.1
-axisFontSize = 24
-legendFontSize = 13
-xSizeInches = 8
+xSizeInches = 9
 ySizeInches = 6
 useRho = True
-savePlots = True
-showPlots = True
-fileExt = 'pdf'
-dpi = 600
 
 # Indices of relevant quantities - use the values listed in the file, they will be converted to Python indices automatically
 mainInds = {
@@ -47,6 +41,9 @@ LInds = {
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
+import sys
+sys.path.append('../plotStandards')
+from plotStandards import axisFontSize, legendFontSize, dpi, fileExt
 
 plt.rc('font', size=axisFontSize)
 plt.rc('legend', fontsize=legendFontSize)
@@ -101,13 +98,12 @@ def makePlot(xdata, ydata, ylabel, figName, leg=None, linestyles=None, fileExt=f
     if ymax is not None:
         plt.ylim(ymax=ymax)
     if yticks is not None:
-        plt.yticks(np.arange(np.floor(np.min(ydata)), np.ceil(np.max(ydata))+yticks, yticks))
+        plt.yticks(np.arange(0, 25.1, yticks))
     plt.xlabel(xlab)
     plt.ylabel(ylabel)
     if leg is not None:
         plt.legend(leg, loc='best')
-    if savePlots:
-        plt.savefig(figName+'.'+fileExt, bbox_inches='tight', dpi=dpi)
+    plt.savefig(figName+'.'+fileExt, bbox_inches='tight', dpi=dpi)
 
 def multiPlot(xdata, ydataList):
     y = np.column_stack(ydataList)
@@ -117,7 +113,7 @@ def multiPlot(xdata, ydataList):
 def calcDelta12(species):
     L11 = 'L11' + species
     L12 = 'L12' + species
-    return vecs[L12] / vecs[L11] #NOTE: I think NTSS uses the old Maassberg definition (without the 3/2)... if you include the 3/2 you get negative numbers in nonsensical places
+    return vecs[L12] / vecs[L11]
 
 # Do work
 for profsFilePath, figNamePrefix in zip(profsFilePaths, figNamePrefixes):
@@ -145,7 +141,4 @@ for profsFilePath, figNamePrefix in zip(profsFilePaths, figNamePrefixes):
     stdStyle = ['solid', 'solid', 'dashed', 'dotted']
 
     makePlot(*multiPlot(xData, [vecs['ne'], vecs['nD'], vecs['nT'], vecs['nHe']]), r'Density ($10^{20}~\mathrm{m^{-3}}$)', figNamePrefix + '_n', leg=stdLeg, linestyles=stdStyle, ymin=0, ymax=nMax)
-    makePlot(*multiPlot(xData, [vecs['Te'], vecs['TD'], vecs['TT'], vecs['TT']]), r'Temperature (keV)', figNamePrefix + '_T', leg=stdLeg, linestyles=stdStyle, ymin=0, ymax=TMax)
-
-if showPlots:
-    plt.show()
+    makePlot(*multiPlot(xData, [vecs['Te'], vecs['TD'], vecs['TT'], vecs['TT']]), r'Temperature (keV)', figNamePrefix + '_T', leg=stdLeg, linestyles=stdStyle, yticks=5, ymin=0, ymax=TMax)

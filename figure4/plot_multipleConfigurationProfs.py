@@ -8,15 +8,9 @@ IbsMin = -50
 IbsMax = 300
 iotaMin = 0.8
 iotaMax = 1.4
-axisFontSize = 24
-legendFontSize = 13
-xSizeInches = 8
+xSizeInches = 9
 ySizeInches = 6
 useRho = True
-savePlots = True
-showPlots = True
-fileExt = 'pdf'
-dpi = 600
 
 # Indices of relevant quantities - use the values listed in the file, they will be converted to Python indices automatically
 mainInds = {
@@ -53,6 +47,9 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
+import sys
+sys.path.append('../plotStandards')
+from plotStandards import axisFontSize, legendFontSize, dpi, fileExt
 
 plt.rc('font', size=axisFontSize)
 plt.rc('legend', fontsize=legendFontSize)
@@ -112,9 +109,8 @@ def makePlot(xdata, ydata, ylabel, figName, leg=None, linestyles=None, fileExt=f
     plt.ylabel(ylabel)
     if leg is not None:
         plt.legend(leg, loc='best')
-    if savePlots:
-        box = mpl.transforms.Bbox.from_extents((-0.3, -0.25, xSizeInches-0.55, ySizeInches-0.5)) # (xmin, ymin, xmax, ymax)
-        plt.savefig(figName+'.'+fileExt, bbox_inches=box, dpi=dpi)
+    box = mpl.transforms.Bbox.from_extents((-0.35, -0.35, xSizeInches-0.7, ySizeInches-0.5)) # (xmin, ymin, xmax, ymax)
+    plt.savefig(figName+'.'+fileExt, bbox_inches=box, dpi=dpi)
 
 def multiPlot(xdata, ydataList):
     y = np.column_stack(ydataList)
@@ -124,7 +120,7 @@ def multiPlot(xdata, ydataList):
 def calcDelta12(species):
     L11 = 'L11' + species
     L12 = 'L12' + species
-    return vecs[L12] / vecs[L11] #NOTE: I think NTSS uses the old Maassberg definition (without the 3/2)... if you include the 3/2 you get negative numbers in nonsensical places
+    return vecs[L12] / vecs[L11]
 
 radVecs = []
 ErVecs = []
@@ -159,10 +155,7 @@ for profsFilePath in profsFilePaths:
 
 # Plot things
 leg = ['Configuration 1', 'Configuration 2', 'Configuration 3']
-makePlot(np.asarray(radVecs).T, np.asarray(ErVecs).T, r'Radial Electric Field (kV/m)', 'Ers', leg=leg, ymin=ErMin, ymax=ErMax)
+makePlot(np.asarray(radVecs).T, np.asarray(ErVecs).T, r'$E_{r}$ (kV/m)', 'Ers', leg=leg, ymin=ErMin, ymax=ErMax)
 makePlot(np.asarray(radVecs).T, np.asarray(L11RatVecs).T, r'$ 2 L_{11}^{e} / \left(L_{11}^{D}+L_{11}^{T}\right) $', 'L11Rats', leg=leg, ymin=L11RatMin, ymax=L11RatMax)
 makePlot(np.asarray(radVecs).T, np.asarray(IbsVecs).T / 1000, r'Bootstrap Current (kA)', 'Ibss', leg=leg, ymin=IbsMin, ymax=IbsMax)
 makePlot(np.asarray(radVecs).T, np.asarray(iotaVecs).T, r'Rotational Transform', 'iotas', leg=leg, ymin=iotaMin, ymax=iotaMax)
-
-if showPlots:
-    plt.show()

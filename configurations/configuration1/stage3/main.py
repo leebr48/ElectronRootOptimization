@@ -36,7 +36,7 @@ DEkwargs = {'args':(),
             'updating':'deferred',
             'workers':1,
             'constraints':(),
-            'x0':None} # NOTE: These were set using a mix of SciPy defaults, SciPy recommendations, and experience with STELLOPT - modifications may be necessary
+            'x0':None}
 BIG_NUM = 1e3 # Large number that is returned to the optimizer in place of L11 if SFINCS fails to run
 fullVMECInputFileName = "input.vmec" # This VMEC input file specifies the initial equilibrium for the optimization
 strippedVMECInputFileName = "stripped_input.vmec" # The should be the same as <fullVMECInputFileName>, but with all the boundary parameters deleted
@@ -65,7 +65,7 @@ def extract_value(dirname):
     try:
         ret = read_transportMatrix(dirname)
     except FileNotFoundError:
-        # NOTE: could increase SFINCS resolution here
+        # Could increase SFINCS resolution here if desired
         print("Failed to extract data from: " + dirname, flush=True)
         ret = BIG_NUM
     
