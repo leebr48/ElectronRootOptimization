@@ -43,7 +43,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import sys
 sys.path.append('../plotStandards')
-from plotStandards import axisFontSize, legendFontSize, dpi, fileExt
+from plotStandards import axisFontSize, legendFontSize, dpi, fileExt, colors
 
 plt.rc('font', size=axisFontSize)
 plt.rc('legend', fontsize=legendFontSize)
@@ -86,11 +86,11 @@ def my_formatter(x, pos):
 def makePlot(xdata, ydata, ylabel, figName, leg=None, linestyles=None, fileExt=fileExt, yticks=None, ymin=None, ymax=None):
     formatter = FuncFormatter(my_formatter)
     plt.subplots(figsize=(xSizeInches, ySizeInches))
-    if linestyles is None:
-        plt.plot(xdata, ydata)
-    else:
-        for X, Y, L in zip(xdata.T, ydata.T, linestyles):
-            plt.plot(X, Y, linestyle=L)
+    for i in range(ydata.shape[1]):
+        if linestyles is None:
+            plt.plot(xdata[:, i], ydata[:, i], c=colors[i])
+        else:
+            plt.plot(xdata[:, i], ydata[:, i], linestyle=linestyles[i], c=colors[i])
     plt.xlim(xmin=np.min(xdata), xmax=np.max(xdata))
     plt.gca().xaxis.set_major_formatter(formatter)
     if ymin is not None:

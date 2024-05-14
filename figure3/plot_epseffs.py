@@ -16,7 +16,7 @@ from scipy.io import netcdf_file
 sys.path.append(os.getenv('STELLOPTPLUSSFINCS_HOME')+'/src')
 from dataProc import createVMECGrids
 sys.path.append('../plotStandards')
-from plotStandards import axisFontSize, legendFontSize, dpi, fileExt
+from plotStandards import axisFontSize, legendFontSize, dpi, fileExt, colors
 
 plt.rc('font', size=axisFontSize)
 plt.rc('legend', fontsize=legendFontSize)
@@ -59,10 +59,10 @@ data = np.column_stack((rhogrid, configuration1_epseff, configuration2_epseff, c
 
 # Plot data
 plt.subplots(figsize=(xSizeInches, ySizeInches))
-plt.plot(data[:,0], data[:,1])
-plt.plot(data[:,0], data[:,2])
-plt.plot(data[:,0], data[:,3])
-plt.plot(data[:,0], data[:,4])
+plt.plot(data[:,0], data[:,1], c=colors[0])
+plt.plot(data[:,0], data[:,2], c=colors[1])
+plt.plot(data[:,0], data[:,3], c=colors[2])
+plt.plot(data[:,0], data[:,4], c=colors[3])
 plt.yticks(np.arange(0,np.ceil(np.max(data[:,1]))+1, 1))
 plt.xlim(xmin=0, xmax=1)
 plt.ylim(ymin=epseffMin, ymax=epseffMax)

@@ -17,7 +17,7 @@ from simsopt.mhd.vmec import Vmec
 import math
 import sys
 sys.path.append('../plotStandards')
-from plotStandards import axisFontSize, dpi, fileExt
+from plotStandards import axisFontSize, dpi, fileExt, colors
 
 plt.rc('font', size=axisFontSize)
 
@@ -70,10 +70,10 @@ for fname, figName, xmin, xmax in zip(fnames, figNames, xmins, xmaxes):
                 Z[itheta,izeta] = Z[itheta,izeta] + zmns[iradius,imode]*math.sin(angle) + zmnc[iradius,imode]*math.cos(angle)
 
     for ind in range(nzeta):
-        plt.plot(R[:,ind], Z[:,ind], '-')
-        plt.plot(R[:,ind], Z[:,ind], '-')
-        plt.plot(R[:,ind], Z[:,ind], '-')
-        plt.plot(R[:,ind], Z[:,ind], '-')
+        plt.plot(R[:,ind], Z[:,ind], '-', c=colors[ind])
+        plt.plot(R[:,ind], Z[:,ind], '-', c=colors[ind])
+        plt.plot(R[:,ind], Z[:,ind], '-', c=colors[ind])
+        plt.plot(R[:,ind], Z[:,ind], '-', c=colors[ind])
 
     plt.axis((xmin, xmax, ymin, ymax))
     plt.gca().xaxis.set_major_locator(LinearLocator(numticks=numticks))
