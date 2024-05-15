@@ -1,5 +1,5 @@
 axisFontSize = 30
-legendFontSize = 13
+legendFontSize = 14
 dpi = 600
 fileExt = 'pdf'
 
