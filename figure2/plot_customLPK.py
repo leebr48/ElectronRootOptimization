@@ -1,8 +1,8 @@
 # This script is based on code from Alan Goodman.
 
 # Inputs
-fnames = ['../configurations/w7xhm/wout_w7xhm.nc', '../configurations/configuration1/stage3/wout_configuration1_stage3.nc', '../configurations/configuration2/wout_configuration2.nc', '../configurations/configuration3/wout_configuration3.nc']
-figNames = ['w7xhm_lpk', 'configuration1_lpk', 'configuration2_lpk', 'configuration3_lpk']
+fnames = ['../configurations/w7xhm/wout_w7xhm.nc', '../configurations/opt/wout_opt.nc']
+figNames = ['w7xhm_lpk', 'opt_lpk']
 xmins = [17, 35, 17, 17]
 xmaxes = [25, 43, 25, 25]
 ymin = -5.25

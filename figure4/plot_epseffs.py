@@ -33,21 +33,15 @@ def my_formatter(x, pos):
 formatter = FuncFormatter(my_formatter)
 
 # Load data
-configuration1_epseff = np.loadtxt('configuration1_epseff.txt')
-configuration2_epseff = np.loadtxt('configuration2_epseff.txt')
-configuration3_epseff = np.loadtxt('configuration3_epseff.txt')
+opt_epseff = np.loadtxt('opt_epseff.txt')
 w7xhm_epseff = np.loadtxt('w7xhm_epseff.txt')
 
-configuration1_wout = netcdf_file('../configurations/configuration1/stage3/wout_configuration1_stage3.nc', mode='r', mmap=False)
-configuration2_wout = netcdf_file('../configurations/configuration2/wout_configuration2.nc', mode='r', mmap=False)
-configuration3_wout = netcdf_file('../configurations/configuration3/wout_configuration3.nc', mode='r', mmap=False)
+opt_wout = netcdf_file('../configurations/opt/wout_opt.nc', mode='r', mmap=False)
 w7xhm_wout = netcdf_file('../configurations/w7xhm/wout_w7xhm.nc', mode='r', mmap=False)
-configuration1_ns = configuration1_wout.variables['ns'][()]
-configuration2_ns = configuration2_wout.variables['ns'][()]
-configuration3_ns = configuration3_wout.variables['ns'][()]
+opt_ns = opt_wout.variables['ns'][()]
 w7xhm_ns = w7xhm_wout.variables['ns'][()]
-if configuration1_ns == configuration2_ns == configuration3_ns == w7xhm_ns:
-    ns = configuration1_ns
+if opt_ns == w7xhm_ns:
+    ns = opt_ns
 else:
     raise IOError('"ns" for the initial and optimized configurations differ - something is wrong.')
 
@@ -55,19 +49,17 @@ else:
 _, fulls = createVMECGrids(ns)
 sgrid = fulls[1:] # Ignore the magnetic axis because eps_eff cannot be evaluated there by NEO.
 rhogrid = np.sqrt(sgrid)
-data = np.column_stack((rhogrid, configuration1_epseff, configuration2_epseff, configuration3_epseff, w7xhm_epseff))
+data = np.column_stack((rhogrid, opt_epseff, w7xhm_epseff))
 
 # Plot data
 plt.subplots(figsize=(xSizeInches, ySizeInches))
 plt.plot(data[:,0], data[:,1], c=colors[0])
 plt.plot(data[:,0], data[:,2], c=colors[1])
-plt.plot(data[:,0], data[:,3], c=colors[2])
-plt.plot(data[:,0], data[:,4], c=colors[3])
 plt.yticks(np.arange(0,np.ceil(np.max(data[:,1]))+1, 1))
 plt.xlim(xmin=0, xmax=1)
 plt.ylim(ymin=epseffMin, ymax=epseffMax)
 plt.gca().xaxis.set_major_formatter(formatter)
 plt.xlabel(r'$\rho$')
 plt.ylabel(r'$\epsilon_\mathrm{eff}$ (%)')
-plt.legend(['Configuration 1', 'Configuration 2', 'Configuration 3', 'W7-X High-Mirror'])
+plt.legend(['Example Configuration', 'W7-X High-Mirror'])
 plt.savefig('epseffs'+'.'+fileExt, bbox_inches='tight', dpi=dpi)

@@ -33,11 +33,11 @@ def my_formatter(x, pos):
 formatter = FuncFormatter(my_formatter)
 
 # Load data
-configuration3_wout = netcdf_file('../configurations/configuration3/wout_configuration3.nc', mode='r', mmap=False)
+opt_wout = netcdf_file('../configurations/opt/wout_opt.nc', mode='r', mmap=False)
 
 # Process data
-all_s = configuration3_wout.variables['am_aux_s'][()]
-all_pres = configuration3_wout.variables['am_aux_f'][()]
+all_s = opt_wout.variables['am_aux_s'][()]
+all_pres = opt_wout.variables['am_aux_f'][()]
 
 final_index = int(np.where(all_s == 1)[0] + 1)
 
