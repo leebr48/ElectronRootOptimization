@@ -9,4 +9,4 @@ The information in table 1 can be obtained from the NTSS files in the `figure5/`
 
 The information in tables 2, 3, and 4 can be obtained from the `input.*` files in the `configurations/opt/` subdirectory.
 
-All the figures in the paper created using Python can be reproduced by running `makeAllPlots.py`. (The figures for field strength on a flux surface and the maximum-J property were produced by others.)
+All the figures in the paper created using Python can be reproduced by running `makeAllPlots.py`. (The figures for field strength on a flux surface and the maximum-$J$ property were produced by others.)
