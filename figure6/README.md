@@ -10,4 +10,4 @@ To trim off the extra white space, run
 
 Finally, rename the cropped file by running
 
-`mv opt_Bmid_cropped.pdf opt_Bmid.pdf'.
+`mv opt_Bmid_cropped.pdf opt_Bmid.pdf`.
