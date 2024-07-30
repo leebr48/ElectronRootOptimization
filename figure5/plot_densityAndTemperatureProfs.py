@@ -1,7 +1,7 @@
 # Inputs
 profsFilePaths = ['opt'] # Path to the main file. Auxiliary files (such as *_Dij) will also be loaded by the program.
 figNamePrefixes = profsFilePaths
-nMax = 2.5
+nMax = 2.0
 TMax = 25.1
 xSizeInches = 9
 ySizeInches = 6
