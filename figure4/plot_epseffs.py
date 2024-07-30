@@ -1,6 +1,6 @@
 #Inputs
 epseffMin = 0
-epseffMax = 5
+epseffMax = 3
 xSizeInches = 9
 ySizeInches = 6
 

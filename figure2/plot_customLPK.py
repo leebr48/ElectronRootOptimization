@@ -3,8 +3,8 @@
 # Inputs
 fnames = ['../configurations/w7xhm/wout_w7xhm.nc', '../configurations/opt/wout_opt.nc']
 figNames = ['w7xhm_lpk', 'opt_lpk']
-xmins = [17, 35, 17, 17]
-xmaxes = [25, 43, 25, 25]
+xmins = [17, 17]
+xmaxes = [25, 25]
 ymin = -5.25
 ymax = 5.25
 numticks = 5

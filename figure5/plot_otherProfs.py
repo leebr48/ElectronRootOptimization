@@ -1,13 +1,13 @@
 # Settings
 profsFilePaths = ['opt'] # Path to the main file. Auxiliary files (such as *_Dij) will also be loaded by the program.
 ErMin = -15
-ErMax = 25
+ErMax = 15
 L11RatMin = 0
-L11RatMax = 3
-IbsMin = -50
-IbsMax = 300
+L11RatMax = 1.5
+IbsMin = -40
+IbsMax = 40
 iotaMin = 0.8
-iotaMax = 1.4
+iotaMax = 1.0
 xSizeInches = 9
 ySizeInches = 6
 useRho = True
@@ -104,7 +104,10 @@ def makePlot(xdata, ydata, ylabel, figName, leg=None, linestyles=None, fileExt=f
     if ymax is not None:
         plt.ylim(ymax=ymax)
     if yticks is not None:
-        plt.yticks(np.arange(np.floor(np.min(ydata)), np.ceil(np.max(ydata))+yticks, yticks))
+        if ymin is not None and ymax is not None:
+            plt.yticks(np.arange(ymin, ymax+yticks, yticks))
+        else:
+            plt.yticks(np.arange(np.floor(np.min(ydata)), np.ceil(np.max(ydata))+yticks, yticks))
     plt.xlabel(xlab)
     plt.ylabel(ylabel)
     if leg is not None:
@@ -154,7 +157,7 @@ for profsFilePath in profsFilePaths:
     iotaVecs.append(vecs['iota'])
 
 # Plot things
-makePlot(np.asarray(radVecs).T, np.asarray(ErVecs).T, r'$E_{r}$ (kV/m)', 'Er', ymin=ErMin, ymax=ErMax)
+makePlot(np.asarray(radVecs).T, np.asarray(ErVecs).T, r'$E_{r}$ (kV/m)', 'Er', ymin=ErMin, ymax=ErMax, yticks=5)
 makePlot(np.asarray(radVecs).T, np.asarray(L11RatVecs).T, r'$ 2 L_{11}^{e} / \left(L_{11}^{D}+L_{11}^{T}\right) $', 'L11Rat', ymin=L11RatMin, ymax=L11RatMax)
 makePlot(np.asarray(radVecs).T, np.asarray(IbsVecs).T / 1000, r'Bootstrap Current (kA)', 'Ibs', ymin=IbsMin, ymax=IbsMax)
 makePlot(np.asarray(radVecs).T, np.asarray(iotaVecs).T, r'Rotational Transform', 'iota', ymin=iotaMin, ymax=iotaMax)
