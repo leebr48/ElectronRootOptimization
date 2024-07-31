@@ -1,6 +1,6 @@
 #Inputs
 presMin = 0
-presMax = 1300
+presMax = 1400
 xSizeInches = 9
 ySizeInches = 6
 
@@ -47,7 +47,7 @@ pres = all_pres[:final_index] / 1000
 # Plot data
 plt.subplots(figsize=(xSizeInches, ySizeInches))
 plt.plot(np.sqrt(s), pres, c=colors[0])
-plt.yticks(np.arange(0,np.ceil(np.max(pres))+1, 200))
+plt.yticks(np.arange(0, presMax+1, 200))
 plt.xlim(xmin=0, xmax=1)
 plt.ylim(ymin=presMin, ymax=presMax)
 plt.gca().xaxis.set_major_formatter(formatter)
