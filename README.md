@@ -1,5 +1,5 @@
 # ElectronRootOptimization
-This repository contains files related to the paper "Direct optimization of neoclassical ion transport in stellarator reactors".
+This repository contains files related to the paper ["Direct optimization of neoclassical ion transport in stellarator reactors"](https://doi.org/10.1088/1741-4326/ad75a6).
 
 The configurations in the paper live as `wout` files in the `configurations/` subdirectory.
 
